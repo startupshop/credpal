@@ -1,0 +1,7 @@
+region           = "us-east-1"
+instance_type    = "t3.micro"
+key_name         = "your-aws-key-pair-name"
+allowed_ssh_cidr = "0.0.0.0/0"
+db_name          = "credpal"
+db_user          = "credpal_user"
+db_password      = "replace-with-strong-password"
