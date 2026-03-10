@@ -120,16 +120,18 @@ Provisioned with Terraform in `us-east-1`:
 
 | Resource | Details |
 |----------|---------|
-| VPC | `10.0.0.0/16`, 2 public subnets |
+| VPC | `10.0.0.0/16`, 2 public subnets (us-east-1a, us-east-1b) |
 | Security Groups | ALB: port 80 open. App: port 3000 from ALB only + SSH |
-| EC2 | `t3.micro`, Amazon Linux 2023 |
-| ALB | Internet-facing, HTTP port 80, forwards to EC2:3000 |
+| EC2 | `t3.micro`, Amazon Linux 2023, `i-013a21fbc2ce04a6b` |
+| ALB | `credpal-alb-2123390626.us-east-1.elb.amazonaws.com`, HTTP port 80 |
 
-**HTTPS** is terminated at the Cloudflare edge. The domain `cred.tpas.aggregatorlink.pw` has a CNAME pointing to the ALB DNS name with Cloudflare proxy enabled (orange cloud). Cloudflare issues and renews the TLS certificate automatically — no ACM required.
+**HTTPS** is terminated at the Cloudflare edge. `cred.tpas.aggregatorlink.pw` is a CNAME pointing to the ALB DNS name with Cloudflare proxy enabled (orange cloud). Cloudflare issues and renews the TLS certificate automatically — no ACM required.
 
 ```
-User (HTTPS) → Cloudflare Edge (TLS) → ALB (HTTP:80) → EC2 (port 3000)
+User (HTTPS) → Cloudflare Edge (TLS) → ALB (HTTP:80) → EC2:3000 (Docker container)
 ```
+
+Live URL: `https://cred.tpas.aggregatorlink.pw`
 
 To deploy infrastructure:
 ```bash
