@@ -1,0 +1,8 @@
+node_modules/
+.env
+.git
+.gitignore
+terraform/
+README.md
+*.log
+.DS_Store
